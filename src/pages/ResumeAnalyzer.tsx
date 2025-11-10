@@ -40,9 +40,10 @@ const ResumeAnalyzer = () => {
       });
     } catch (error: any) {
       console.error("Error analyzing resume:", error);
+      const description = error.message ? `Details: ${error.message}` : "Please check the function logs for more details.";
       toast({
-        title: "Error",
-        description: error.message || "Failed to analyze resume. Please try again.",
+        title: "Failed to analyze resume",
+        description,
         variant: "destructive",
       });
     } finally {

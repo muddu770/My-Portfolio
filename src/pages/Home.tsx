@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Code, Sparkles, Award } from "lucide-react";
 import { Link } from "react-router-dom";
 import Scene3D from "@/components/Scene3D";
+import portfolioImage from "/Muddassir_portfolio.jpg";
 
 const Home = () => {
   return (
@@ -15,13 +16,20 @@ const Home = () => {
               Welcome to my portfolio
             </span>
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              SHAIK MOHAMMAD
-            </span>
-            <br />
-            <span className="text-foreground">MUDDASSIR</span>
-          </h1>
+          <div className="flex items-center gap-6">
+            <img
+              src={portfolioImage}
+              alt="Muddassir"
+              className="w-24 h-24 rounded-full border-4 border-primary/50 object-cover"
+            />
+            <h1 className="text-5xl md:text-6xl font-bold leading-tight">
+              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                SHAIK MOHAMMAD
+              </span>
+              <br />
+              <span className="text-foreground">MUDDASSIR</span>
+            </h1>
+          </div>
           <p className="text-xl text-muted-foreground leading-relaxed">
             Computer Science Engineering Student passionate about building innovative solutions 
             and exploring cutting-edge technologies.
