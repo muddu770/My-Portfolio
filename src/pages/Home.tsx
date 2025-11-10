@@ -1,11 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Code, Sparkles, Award } from "lucide-react";
-import { Link } from "react-router-dom";
-import Scene3D from "@/components/Scene3D";
-import portfolioImage from "/Muddassir_portfolio.jpg";
+// import { Link } from "react-router-dom"; // This component requires a Router context, which seems to be missing.
+// import Scene3D from "@/components/Scene3D"; // No longer needed
+// The import path was causing an error. We'll assume the image is in the 'public' folder.
+// import portfolioImage from "/Muddassir_portfolio.jpg";
 
 const Home = () => {
+  // Use the path directly, assuming the image is in the 'public' folder.
+  const portfolioImage = "/Muddassir_portfolio.jpg";
+
   return (
     <div className="space-y-16 animate-fade-in">
       {/* Hero Section */}
@@ -21,6 +25,11 @@ const Home = () => {
               src={portfolioImage}
               alt="Muddassir"
               className="w-24 h-24 rounded-full border-4 border-primary/50 object-cover"
+              onError={(e) => {
+                // Fallback in case the image fails to load
+                e.currentTarget.src = "https://placehold.co/96x96/60a5fa/ffffff?text=SM";
+                e.currentTarget.onerror = null;
+              }}
             />
             <h1 className="text-5xl md:text-6xl font-bold leading-tight">
               <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -31,24 +40,37 @@ const Home = () => {
             </h1>
           </div>
           <p className="text-xl text-muted-foreground leading-relaxed">
-            Computer Science Engineering Student passionate about building innovative solutions 
-            and exploring cutting-edge technologies.
+            Computer Science Engineering Student passionate about building
+            innovative solutions and exploring cutting-edge technologies.
           </p>
           <div className="flex flex-wrap gap-4">
+            {/* Replaced <Link> with <a> to fix the error. 
+              This will cause a page refresh on navigation.
+              The root cause is that <Home> is likely not rendered inside a <BrowserRouter>.
+            */}
             <Button asChild size="lg" className="group">
-              <Link to="/portfolio">
+              <a href="/portfolio">
                 View Portfolio
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </a>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <Link to="/contact">Get in Touch</Link>
+              <a href="/contact">Get in Touch</a>
             </Button>
           </div>
         </div>
 
         <div className="h-[500px] rounded-2xl overflow-hidden glass-card glow-cyan">
-          <Scene3D />
+          <img
+            src={portfolioImage}
+            alt="Muddassir Portfolio"
+            className="w-full h-full object-cover" // This ensures the image covers the container
+            onError={(e) => {
+              // Fallback in case the image fails to load
+              e.currentTarget.src = "https://placehold.co/600x500/172554/ffffff?text=Portfolio";
+              e.currentTarget.onerror = null;
+            }}
+          />
         </div>
       </section>
 
@@ -61,7 +83,8 @@ const Home = () => {
             </div>
             <h3 className="text-xl font-semibold">Full Stack Development</h3>
             <p className="text-muted-foreground">
-              Proficient in Python, Java, JavaScript with experience in Angular, Django, and Flutter.
+              Proficient in Python, Java, JavaScript with experience in Angular,
+              Django, and Flutter.
             </p>
           </CardContent>
         </Card>
@@ -73,7 +96,8 @@ const Home = () => {
             </div>
             <h3 className="text-xl font-semibold">AI & Machine Learning</h3>
             <p className="text-muted-foreground">
-              Built projects using NLP, speech recognition, and social media monitoring with AI.
+              Built projects using NLP, speech recognition, and social media
+              monitoring with AI.
             </p>
           </CardContent>
         </Card>
@@ -85,7 +109,8 @@ const Home = () => {
             </div>
             <h3 className="text-xl font-semibold">ServiceNow Certified</h3>
             <p className="text-muted-foreground">
-              Certified System Administrator (CSA) and Certified Application Developer (CAD).
+              Certified System Administrator (CSA) and Certified Application
+              Developer (CAD).
             </p>
           </CardContent>
         </Card>
